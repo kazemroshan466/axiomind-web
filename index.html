@@ -1,74 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AXIOMIND MASTER</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        /* استایل‌های نئونی و خفن */
+        :root { --bg: #050505; --neon-green: #00ff88; --neon-blue: #00d4ff; }
+        body { background: var(--bg); color: #fff; font-family: 'Orbitron', sans-serif; margin: 0; padding-bottom: 70px; }
+        .tab-content { display: none; padding: 15px; }
+        .active { display: block; }
+        .widget-box { height: 70vh; border-radius: 20px; overflow: hidden; border: 1px solid var(--neon-green); box-shadow: 0 0 20px rgba(0,255,136,0.2); }
+        .nav-bar { position: fixed; bottom: 0; width: 100%; background: #000; display: flex; padding: 15px 0; border-top: 2px solid var(--neon-blue); }
+        .nav-item { flex: 1; text-align: center; color: #fff; cursor: pointer; }
+        h2 { text-align: center; color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
+    </style>
+</head>
+<body>
 
-:root {
-    --neon-green: #00ff88;
-    --neon-blue: #00d4ff;
-    --bg-dark: #05070a;
-}
+    <div id="crypto" class="tab-content active">
+        <h2><i class="fas fa-coins"></i> CRYPTO MARKET</h2>
+        <div class="widget-box">
+            <script src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js">
+            { "width": "100%", "height": "100%", "screener_type": "crypto_mkt", "colorTheme": "dark" }
+            </script>
+        </div>
+    </div>
 
-body {
-    background: var(--bg-dark);
-    color: white;
-    font-family: 'Orbitron', sans-serif;
-    margin: 0;
-    overflow-x: hidden;
-}
+    <div id="forex" class="tab-content">
+        <h2><i class="fas fa-globe"></i> FOREX MARKET</h2>
+        <div class="widget-box">
+            <script src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js">
+            { "width": "100%", "height": "100%", "screener_type": "forex_mkt", "colorTheme": "dark" }
+            </script>
+        </div>
+    </div>
 
-/* افکت درخشش نئونی برای کارت‌ها */
-.feature-card {
-    background: rgba(20, 25, 35, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    padding: 20px;
-    text-align: center;
-    transition: 0.4s;
-    box-shadow: 0 0 15px rgba(0, 255, 136, 0.1);
-}
+    <div id="news" class="tab-content">
+        <h2><i class="fas fa-newspaper"></i> GLOBAL NEWS</h2>
+        <div class="widget-box">
+            <script src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js">
+            { "feedMode": "all_symbols", "colorTheme": "dark", "height": "100%", "width": "100%" }
+            </script>
+        </div>
+    </div>
 
-.feature-card:hover {
-    box-shadow: 0 0 25px var(--neon-green);
-    border-color: var(--neon-green);
-}
+    <div class="nav-bar">
+        <div class="nav-item" onclick="show('crypto')"><i class="fas fa-bitcoin"></i><br>Crypto</div>
+        <div class="nav-item" onclick="show('forex')"><i class="fas fa-chart-line"></i><br>Forex</div>
+        <div class="nav-item" onclick="show('news')"><i class="fas fa-bell"></i><br>News</div>
+    </div>
 
-/* آیکون‌های رنگی و درخشان */
-.fa-bitcoin { color: #f7931a; text-shadow: 0 0 10px #f7931a; }
-.fa-robot { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-.fa-chart-line { color: var(--neon-green); text-shadow: 0 0 10px var(--neon-green); }
-
-/* عنوان‌ها */
-h1, h2 {
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    text-shadow: 0 0 10px rgba(255,255,255,0.3);
-}
-
-/* پنل سیگنال نئونی */
-.signal-card {
-    background: linear-gradient(135deg, #0a0e14, #1a1f29);
-    border: 1px solid var(--neon-green);
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 0 30px rgba(0, 255, 136, 0.2);
-    margin: 20px;
-}
-
-.signal-type.buy {
-    color: var(--neon-green);
-    font-weight: bold;
-    font-size: 1.2rem;
-    text-shadow: 0 0 10px var(--neon-green);
-}
-
-/* انیمیشن پس‌زمینه */
-.bg-animation {
-    position: fixed;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at 50% 50%, #0a1f1a, #05070a);
-    z-index: -1;
-}
-@keyframes glow {
-    0% { box-shadow: 0 0 5px var(--neon-green); }
-    50% { box-shadow: 0 0 20px var(--neon-green); }
-    100% { box-shadow: 0 0 5px var(--neon-green); }
-}
-.feature-card { animation: glow 3s infinite; }
+    <script>
+        function show(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
+        window.Telegram.WebApp.expand();
+    </script>
+</body>
+</html>
