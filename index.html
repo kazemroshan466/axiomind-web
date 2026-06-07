@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -9,7 +10,7 @@
 <link rel="stylesheet" href="style.css">
 
 <link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
@@ -17,39 +18,47 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <body>
 
-<div id="language-screen">
+<div id="language-page">
 
-    <div class="language-box">
+    <div class="glass">
 
-        <h1>AXIOMIND MASTER</h1>
+        <div class="logo">
+            AXIOMIND
+        </div>
 
-        <p>Select Language</p>
+        <div class="subtitle">
+            AI CRYPTO & FOREX SIGNALS
+        </div>
 
-        <button onclick="setLanguage('fa')">
-            🇮🇷 فارسی
-        </button>
+        <div class="lang-grid">
 
-        <button onclick="setLanguage('en')">
-            🇬🇧 English
-        </button>
+            <button class="lang-btn">
+                🇮🇷 فارسی
+            </button>
 
-        <button onclick="setLanguage('bs')">
-            🇧🇦 Bosanski
-        </button>
+            <button class="lang-btn">
+                🇬🇧 English
+            </button>
+
+            <button class="lang-btn">
+                🇧🇦 Bosanski
+            </button>
+
+        </div>
 
     </div>
 
 </div>
 
-<div id="app" style="display:none;">
+<div id="dashboard">
 
 <header>
 
-    <div class="logo">
+    <div class="brand">
         AXIOMIND MASTER
     </div>
 
-    <div class="subscription-badge">
+    <div class="vip">
         VIP
     </div>
 
@@ -57,95 +66,101 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 <section class="hero">
 
-    <h2 id="welcome-text">
-        Welcome
-    </h2>
+<h1>
+Trade Smarter
+</h1>
 
-    <p>
-        AI Powered Crypto & Forex Signals
-    </p>
+<p>
+AI Powered Signals & Market Analysis
+</p>
 
 </section>
 
-<div class="cards">
+<section class="cards">
 
-    <div class="card">
-        <i class="fas fa-robot"></i>
-        <h3>AI Analysis</h3>
-    </div>
-
-    <div class="card">
-        <i class="fas fa-coins"></i>
-        <h3>Crypto</h3>
-    </div>
-
-    <div class="card">
-        <i class="fas fa-chart-line"></i>
-        <h3>Forex</h3>
-    </div>
-
-    <div class="card">
-        <i class="fas fa-newspaper"></i>
-        <h3>News</h3>
-    </div>
-
-    <div class="card">
-        <i class="fas fa-graduation-cap"></i>
-        <h3>Academy</h3>
-    </div>
-
-    <div class="card">
-        <i class="fas fa-user"></i>
-        <h3>Profile</h3>
-    </div>
-
+<div class="card">
+<i class="fa-solid fa-robot"></i>
+<h3>AI Analysis</h3>
 </div>
 
-<section class="signals">
+<div class="card">
+<i class="fa-brands fa-bitcoin"></i>
+<h3>Crypto</h3>
+</div>
 
-    <h2>Premium Signals</h2>
+<div class="card">
+<i class="fa-solid fa-chart-line"></i>
+<h3>Forex</h3>
+</div>
 
-    <div class="signal-card buy">
+<div class="card">
+<i class="fa-solid fa-newspaper"></i>
+<h3>News</h3>
+</div>
 
-        <h3>BTC/USDT</h3>
+<div class="card">
+<i class="fa-solid fa-graduation-cap"></i>
+<h3>Academy</h3>
+</div>
 
-        <span class="signal-type">
-            BUY
-        </span>
+<div class="card">
+<i class="fa-solid fa-user"></i>
+<h3>Profile</h3>
+</div>
 
-        <p>Entry: 105000</p>
+</section>
 
-        <p>TP1: 106500</p>
+<section class="signal-box">
 
-        <p>TP2: 108000</p>
+<h2>
+Premium Signals
+</h2>
 
-        <p>SL: 103500</p>
+<div class="signal buy">
 
-    </div>
+BTCUSDT
+
+<br>
+
+Entry : 105000
+
+<br>
+
+TP1 : 106500
+
+<br>
+
+TP2 : 108000
+
+<br>
+
+SL : 103500
+
+</div>
 
 </section>
 
 <nav class="bottom-nav">
 
-    <button>
-        <i class="fas fa-home"></i>
-    </button>
+<button>
+<i class="fa-solid fa-house"></i>
+</button>
 
-    <button>
-        <i class="fas fa-chart-line"></i>
-    </button>
+<button>
+<i class="fa-solid fa-chart-line"></i>
+</button>
 
-    <button>
-        <i class="fas fa-robot"></i>
-    </button>
+<button>
+<i class="fa-solid fa-robot"></i>
+</button>
 
-    <button>
-        <i class="fas fa-newspaper"></i>
-    </button>
+<button>
+<i class="fa-solid fa-newspaper"></i>
+</button>
 
-    <button>
-        <i class="fas fa-user"></i>
-    </button>
+<button>
+<i class="fa-solid fa-user"></i>
+</button>
 
 </nav>
 
