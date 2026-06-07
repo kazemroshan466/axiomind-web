@@ -4,62 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AXIOMIND PRO</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: sans-serif; background: #0b0e14; color: white; margin: 0; padding-bottom: 70px; }
-        .tab-content { display: none; padding: 20px; }
+        body { font-family: 'Segoe UI', sans-serif; background: #0b0e14; color: white; margin: 0; padding-bottom: 70px; }
+        .tab-content { display: none; padding: 15px; }
         .active-tab { display: block; }
-        
-        .navbar { position: fixed; bottom: 0; width: 100%; display: flex; background: #151a22; border-top: 1px solid #222c3a; }
-        .nav-btn { flex: 1; padding: 15px; text-align: center; cursor: pointer; font-size: 12px; }
+        .navbar { position: fixed; bottom: 0; width: 100%; display: flex; background: #151a22; border-top: 1px solid #222c3a; z-index: 100; }
+        .nav-btn { flex: 1; padding: 12px; text-align: center; cursor: pointer; font-size: 14px; }
         .nav-btn.active { color: #00e676; border-top: 2px solid #00e676; }
-        
-        .card { background: #151a22; padding: 15px; border-radius: 12px; margin-bottom: 10px; }
-        iframe { width: 100%; height: 400px; border: none; border-radius: 10px; }
+        .list-item { background: #151a22; padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222c3a; }
+        .icon { font-size: 20px; margin-right: 10px; }
+        .crypto-icon { color: #f7931a; } .forex-icon { color: #3498db; }
     </style>
 </head>
 <body>
 
     <div id="crypto" class="tab-content active-tab">
-        <h2>Crypto Market</h2>
-        <div class="card">BTC/USDT: <span id="btc-price">...</span></div>
-        <div class="card">ETH/USDT: <span id="eth-price">...</span></div>
+        <h2><i class="fas fa-coins" style="color:#f7931a;"></i> Top Crypto Assets</h2>
+        <div id="crypto-list"></div>
     </div>
 
     <div id="forex" class="tab-content">
-        <h2>Forex Analysis</h2>
-        <div class="card">EUR/USD: 1.0850</div>
-        <div class="card">GBP/USD: 1.2720</div>
+        <h2><i class="fas fa-chart-line" style="color:#3498db;"></i> Forex Indices</h2>
+        <div id="forex-list"></div>
     </div>
 
     <div id="news" class="tab-content">
-        <h2>Latest News</h2>
-        <iframe src="https://cryptopanic.com/widgets/news/?background=transparent&news_feed=recent&posts_limit=5"></iframe>
+        <h2><i class="fas fa-newspaper" style="color:#e74c3c;"></i> Live Feed</h2>
+        <iframe src="https://cryptopanic.com/widgets/news/?background=transparent" style="width:100%; height:500px; border:none;"></iframe>
     </div>
 
     <div class="navbar">
-        <div class="nav-btn active" onclick="showTab('crypto')">Crypto</div>
-        <div class="nav-btn" onclick="showTab('forex')">Forex</div>
-        <div class="nav-btn" onclick="showTab('news')">News</div>
+        <div class="nav-btn active" onclick="showTab('crypto')"><i class="fas fa-bitcoin"></i> Crypto</div>
+        <div class="nav-btn" onclick="showTab('forex')"><i class="fas fa-dollar-sign"></i> Forex</div>
+        <div class="nav-btn" onclick="showTab('news')"><i class="fas fa-bell"></i> News</div>
     </div>
 
     <script>
-        function showTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        const cryptoAssets = ["BTC", "ETH", "SOL", "ADA", "XRP", "DOT", "LINK", "AVAX", "MATIC", "DOGE"]; // اینجا می‌توانی تا ۲۰۰ تا اضافه کنی
+        const forexPairs = ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", "XAUUSD", "XAGUSD"];
+
+        function showTab(id) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active-tab'));
             document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(tabId).style.display = 'block';
+            document.getElementById(id).classList.add('active-tab');
             event.currentTarget.classList.add('active');
         }
 
-        // آپدیت قیمت‌ها
-        async function updatePrices() {
-            const res = await fetch('https://api.binance.com/api/v3/ticker/price?symbols=["BTCUSDT","ETHUSDT"]');
-            const data = await res.json();
-            document.getElementById('btc-price').innerText = '$' + parseFloat(data[0].price).toLocaleString();
-            document.getElementById('eth-price').innerText = '$' + parseFloat(data[1].price).toLocaleString();
-        }
-        setInterval(updatePrices, 5000);
-        updatePrices();
+        // تولید لیست هوشمند
+        cryptoAssets.forEach(c => {
+            document.getElementById('crypto-list').innerHTML += `<div class="list-item"><span class="crypto-icon"><i class="fab fa-bitcoin"></i> ${c}</span><span>$Loading...</span></div>`;
+        });
+        forexPairs.forEach(f => {
+            document.getElementById('forex-list').innerHTML += `<div class="list-item"><span class="forex-icon"><i class="fas fa-chart-area"></i> ${f}</span><span>1.xxxx</span></div>`;
+        });
     </script>
 </body>
 </html>
