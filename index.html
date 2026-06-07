@@ -3,62 +3,66 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AXIOMIND PRO</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>AXIOMIND ULTIMATE PRO</title>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <style>
-        body { font-family: 'Segoe UI', sans-serif; background: #0b0e14; color: white; margin: 0; padding-bottom: 70px; }
+        :root { --bg: #0b0e14; --panel: #151a22; --accent: #00e676; }
+        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: #fff; margin: 0; padding-bottom: 80px; }
+        
+        .header { padding: 20px; text-align: center; border-bottom: 1px solid #222c3a; }
         .tab-content { display: none; padding: 15px; }
-        .active-tab { display: block; }
-        .navbar { position: fixed; bottom: 0; width: 100%; display: flex; background: #151a22; border-top: 1px solid #222c3a; z-index: 100; }
-        .nav-btn { flex: 1; padding: 12px; text-align: center; cursor: pointer; font-size: 14px; }
-        .nav-btn.active { color: #00e676; border-top: 2px solid #00e676; }
-        .list-item { background: #151a22; padding: 12px; border-radius: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #222c3a; }
-        .icon { font-size: 20px; margin-right: 10px; }
-        .crypto-icon { color: #f7931a; } .forex-icon { color: #3498db; }
+        .active { display: block; }
+        
+        /* استایل ویجت‌ها */
+        .widget-container { width: 100%; height: 600px; border-radius: 15px; overflow: hidden; background: var(--panel); }
+        
+        .nav-bar { position: fixed; bottom: 0; width: 100%; display: flex; background: #000; padding: 10px 0; border-top: 2px solid var(--accent); }
+        .nav-item { flex: 1; text-align: center; font-size: 10px; color: #8a96a3; }
+        .nav-item i { font-size: 20px; display: block; margin-bottom: 5px; }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
-    <div id="crypto" class="tab-content active-tab">
-        <h2><i class="fas fa-coins" style="color:#f7931a;"></i> Top Crypto Assets</h2>
-        <div id="crypto-list"></div>
+<div class="header"><h1>AXIOMIND <span style="color:var(--accent)">PRO</span></h1></div>
+
+<div id="crypto" class="tab-content active">
+    <div class="widget-container">
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-screener.js">
+        { "width": "100%", "height": "100%", "defaultColumn": "overview", "screener_type": "crypto_mkt", "displayCurrency": "USD", "colorTheme": "dark" }
+        </script>
     </div>
+</div>
 
-    <div id="forex" class="tab-content">
-        <h2><i class="fas fa-chart-line" style="color:#3498db;"></i> Forex Indices</h2>
-        <div id="forex-list"></div>
+<div id="forex" class="tab-content">
+    <div class="widget-container">
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-forex-cross-rates.js">
+        { "width": "100%", "height": "100%", "currencies": ["EUR", "USD", "JPY", "GBP", "CHF", "AUD", "CAD", "NZD"], "colorTheme": "dark" }
+        </script>
     </div>
+</div>
 
-    <div id="news" class="tab-content">
-        <h2><i class="fas fa-newspaper" style="color:#e74c3c;"></i> Live Feed</h2>
-        <iframe src="https://cryptopanic.com/widgets/news/?background=transparent" style="width:100%; height:500px; border:none;"></iframe>
+<div id="news" class="tab-content">
+    <div class="widget-container">
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-timeline.js">
+        { "width": "100%", "height": "100%", "feedMode": "market", "market": "crypto", "colorTheme": "dark" }
+        </script>
     </div>
+</div>
 
-    <div class="navbar">
-        <div class="nav-btn active" onclick="showTab('crypto')"><i class="fas fa-bitcoin"></i> Crypto</div>
-        <div class="nav-btn" onclick="showTab('forex')"><i class="fas fa-dollar-sign"></i> Forex</div>
-        <div class="nav-btn" onclick="showTab('news')"><i class="fas fa-bell"></i> News</div>
-    </div>
+<div class="nav-bar">
+    <div class="nav-item" onclick="openTab('crypto')"><i class="fas fa-coins"></i>Crypto</div>
+    <div class="nav-item" onclick="openTab('forex')"><i class="fas fa-globe"></i>Forex</div>
+    <div class="nav-item" onclick="openTab('news')"><i class="fas fa-newspaper"></i>News</div>
+</div>
 
-    <script>
-        const cryptoAssets = ["BTC", "ETH", "SOL", "ADA", "XRP", "DOT", "LINK", "AVAX", "MATIC", "DOGE"]; // اینجا می‌توانی تا ۲۰۰ تا اضافه کنی
-        const forexPairs = ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", "XAUUSD", "XAGUSD"];
-
-        function showTab(id) {
-            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active-tab'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-            document.getElementById(id).classList.add('active-tab');
-            event.currentTarget.classList.add('active');
-        }
-
-        // تولید لیست هوشمند
-        cryptoAssets.forEach(c => {
-            document.getElementById('crypto-list').innerHTML += `<div class="list-item"><span class="crypto-icon"><i class="fab fa-bitcoin"></i> ${c}</span><span>$Loading...</span></div>`;
-        });
-        forexPairs.forEach(f => {
-            document.getElementById('forex-list').innerHTML += `<div class="list-item"><span class="forex-icon"><i class="fas fa-chart-area"></i> ${f}</span><span>1.xxxx</span></div>`;
-        });
-    </script>
+<script>
+    function openTab(id) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+    }
+    // تنظیمات مینی‌آپ تلگرام
+    window.Telegram.WebApp.expand();
+</script>
 </body>
 </html>
